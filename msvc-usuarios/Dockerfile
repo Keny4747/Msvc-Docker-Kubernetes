@@ -19,7 +19,6 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 COPY --from=builder /app/msvc-usuarios/target/msvc-usuarios-0.0.1-SNAPSHOT.jar .
-ENV PORT 8000
 
 EXPOSE ${PORT}
 

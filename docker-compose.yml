@@ -35,7 +35,17 @@ services:
       - spring
   # Microservicio usuarios
   msvc-usuarios:
-    image: usuarios:latest
+    container_name: msvc-usuarios
+    #construir a partir de imagen local
+    #image: usuarios:latest //o hacer un build si la imagen no existe
+      #=============================
+      #//Construir a partir de build una imagen dockerfile
+      #build:
+      # context: ./
+      # dockerfile: ./msvc-usuarios/Dockerfile
+     #=============================
+    #construir a partir de dockerhub:
+    image: keny47/usuarios:latest
     ports:
       - "8001:8001"
     networks:
@@ -45,13 +55,24 @@ services:
     restart: always
   # Microservicio cursos
   msvc-cursos:
-    image: cursos:latest
+    container_name: msvc-cursos
+    #construir a partir de imagen local
+    #image: cursos:latest //o hacer un build si la imagen no existe
+    #=============================
+    #//Construir a partir de build una imagen dockerfile
+    #   build:
+    #  context: ./
+    #  dockerfile: ./msvc-cursos/Dockerfile
+    #=============================
+    #construir a partir de dockerhub:
+    image: keny47/cursos:latest
     ports:
       - "8002:8002"
     networks:
       - spring
     depends_on:
       - postgres
+      - msvc-usuarios
     restart: always
 
 volumes:
